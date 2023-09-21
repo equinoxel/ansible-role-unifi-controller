@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://git.laurivan.com/Dev/ansible-role-unifi-controller/compare/v1.0.0...v1.1.1) (2023-09-21)
+
+
+### Bug Fixes
+
+* Linting. ([28c32a7](https://git.laurivan.com/Dev/ansible-role-unifi-controller/commit/28c32a767f98bca403abedfdfe3e38ca9b665c31))
+
 ## [1.0.0](https://git.laurivan.com/Dev/ansible-role-unifi-controller/compare/v1.1.0...v1.0.0) (2023-09-21)
 
 ## 1.1.0 (2023-09-21)

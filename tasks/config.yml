@@ -1,0 +1,24 @@
+---
+- name: "UNIFI-CONTROLLER | Set up directories"
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ ansible_effective_user_id }}"
+    group: "{{ ansible_effective_group_id }}"
+    mode: "0750"
+  with_items:
+    - "{{ unifi_skeleton_paths }}"
+  tags:
+    - unifi_configure
+  become: true
+
+- name: "UNIFI-CONTROLLER | Write configuration files"
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "{{ unifi_config_path | expanduser | realpath  }}/{{ item  }}"
+    mode: '0640'
+  with_items:
+    - "{{ unifi_configuration_files }}"
+  tags:
+    - unifi_configure
+  

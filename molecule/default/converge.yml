@@ -1,0 +1,5 @@
+---
+- name: "UNIFI-CONTROLLER | Converge"
+  hosts: "unifi_group"
+  roles:
+    - role: "laurivan.unifi_controller"

@@ -1,0 +1,27 @@
+---
+- name: "UNIFI-CONTROLLER | Destroy"
+  hosts: "localhost"
+  connection: "local"
+  gather_facts: false
+  no_log: "{{ molecule_no_log }}"
+  tasks:
+    # Developer must implement.
+    - name: "UNIFI-CONTROLLER | Remove the docker image"
+      community.docker.docker_container:
+        name: "unifi-controller"
+        state: "absent"
+
+    # Mandatory configuration for Molecule to function.
+
+    - name: "UNIFI-CONTROLLER | Populate instance config"
+      ansible.builtin.set_fact:
+        instance_conf: {}
+
+    - name: "UNIFI-CONTROLLER | Dump instance config"
+      ansible.builtin.copy:
+        content: |
+          # Molecule managed
+          {{ instance_conf | to_json | from_json | to_yaml }}
+        dest: "{{ molecule_instance_config }}"
+        mode: 0600
+      when: "server.changed | default(false) | bool"

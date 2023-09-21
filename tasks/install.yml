@@ -1,0 +1,7 @@
+---
+- name: "UNIFI-CONTROLLER | Ensure unifi-controller is running"
+  community.docker.docker_compose:
+    project_src: "{{ unifi_config_path | expanduser | realpath }}"
+    build: false
+  tags:
+    - unifi_install

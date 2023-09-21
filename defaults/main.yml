@@ -1,0 +1,42 @@
+---
+
+## General
+unifi_image: lscr.io/linuxserver/unifi-controller:latest
+
+unifi_uid: 1000
+unifi_gid: 1000
+unifi_mem_limit: 1024
+unifi_mem_startup: 1024
+
+unifi_volume: "unifi"
+
+unifi_http_port_8443: 8443
+unifi_http_port_3478: 3478
+unifi_http_port_10001: 10001
+unifi_http_port_8080: 8080
+
+# Optional ports
+unifi_http_port_1900: 1900
+unifi_http_port_8843: 8843
+unifi_http_port_8880: 8880
+unifi_http_port_6789: 6789
+unifi_http_port_5514: 5514
+
+
+# Unifi-Controller paths
+unifi_root_path: /var/local
+unifi_data_base:  "{{ unifi_root_path }}/unifi-controller"
+unifi_config_path: "{{ unifi_root_path }}/conf/unifi-controller"
+
+# Add other paths here to make sure they're created automatically
+#
+unifi_skeleton_paths:
+  - "{{ unifi_config_path }}"
+
+# Add more templates to be copied into the config 
+unifi_configuration_files:
+  - "docker-compose.yml"
+  - "env.unifi-controller.conf"
+
+# Documentation
+unifi_documentation_link: "https://www.laurivan.com"

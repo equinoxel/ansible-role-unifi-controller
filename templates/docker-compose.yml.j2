@@ -1,0 +1,40 @@
+# unifi-controller docker compose
+version: '3.9'
+services:
+  unifi-controller:
+    image: "{{ unifi_image }}"
+    container_name: unifi-controller-service
+    restart: unless-stopped
+    env_file:
+      - "{{ unifi_config_path | expanduser }}/env.unifi-controller.conf"
+    ports:
+      - "{{ unifi_http_port_8443 }}:8443"
+      - "{{ unifi_http_port_3478 }}:3478/udp"
+      - "{{ unifi_http_port_10001 }}:10001/udp"
+      - "{{ unifi_http_port_8080 }}:8080"
+      {% if unifi_http_port_1900 is defined -%}
+      - "{{ unifi_http_port_1900 }}:1900/udp"
+      {% endif -%}
+      {% if unifi_http_port_8843 is defined -%}
+      - "{{ unifi_http_port_8843 }}:8843"
+      {% endif -%}
+      {% if unifi_http_port_8880 is defined -%}
+      - "{{ unifi_http_port_8880 }}:8880"
+      {% endif -%}
+      {% if unifi_http_port_6789 is defined -%}
+      - "{{ unifi_http_port_6789 }}:6789"
+      {% endif -%}
+      {% if unifi_http_port_5514 is defined -%}
+      - "{{ unifi_http_port_5514 }}:5514/udp"
+      {% endif %}
+
+    networks:
+      - unifi-controller-net
+    volumes:
+      - "{{ unifi_volume }}:/config"
+
+volumes:
+  {{ unifi_volume }}:
+
+networks:
+  unifi-controller-net: {}

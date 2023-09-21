@@ -1,0 +1,26 @@
+---
+
+galaxy_info:
+  author: Laur Ivan (laur.ivan@gmail.com)
+  namespace: laurivan
+
+  role_name: unifi_controller
+  description: Unifi Controller Role
+  min_ansible_version: "2.10"
+  min_ansible_container_version: "2.10"
+  license: MIT
+  galaxy_tags:
+    - unifi
+    - network
+    - controller
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - buster
+
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - jammy

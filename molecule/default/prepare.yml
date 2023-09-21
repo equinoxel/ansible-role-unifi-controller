@@ -1,0 +1,38 @@
+---
+- name: "UNIFI-CONTROLLER | Setup the test machine"
+  hosts: "unifi-controller"
+  tasks:
+    - name: "UNIFI-CONTROLLER | Check if /var/run/docker.sock already exists"
+      ansible.builtin.stat:
+        path: "/var/run/docker.sock"
+      register: "docker_sock_stat"
+
+    - name: "UNIFI-CONTROLLER | Create docker.sock"
+      ansible.builtin.raw: touch /var/run/docker.sock
+      become: true
+      changed_when: false
+      when: "not docker_sock_stat.stat.exists"
+
+    - name: "UNIFI-CONTROLLER | Move docker.sock from tmp"
+      ansible.builtin.raw: >
+        mount --move /tmp/docker_mounted.sock /var/run/docker.sock
+      become: true
+      changed_when: false
+      when: "not docker_sock_stat.stat.exists"
+
+    - name: "UNIFI-CONTROLLER | Update apt cache."
+      ansible.builtin.apt: update_cache=yes cache_valid_time=600
+      when: "ansible_os_family == 'Debian'"
+
+    - name: "UNIFI-CONTROLLER | Install python requests"
+      ansible.builtin.pip:
+        name:
+          - "requests"
+          - "docker"
+          - "docker-compose"
+
+    - name: "UNIFI-CONTROLLER | Install docker"
+      vars:
+        docker_service_manage: false
+      ansible.builtin.include_role:
+        name: "geerlingguy.docker"

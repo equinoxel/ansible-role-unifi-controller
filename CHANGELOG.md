@@ -1,18 +1,18 @@
-# Change Log
+# Changelog
 
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [Unreleased](https://github.com/equinoxel/ansible-role-unifi-controller/tree/develop)
-### Changed
-### Added
-### Removed
-### Fixed
+## 1.1.0 (2023-09-21)
 
-## [X.Y.Z](https://github.com/equinoxel/ansible-role-unifi-controller/tree/X.Y.Z)
-### [Full Changelog](https://github.com/equinoxel/ansible-role-unifi-controller/compare/1.0.0...X.Y.Z)
-### Changed
- *[#<issue_number>](https://github.com/equinoxel/ansible-role-unifi-controller/issues/<issue_number>) \<Change description\>* @\<author\>
+
+### Features
+
+* Initial commit ([5edf4f8](https://git.laurivan.com/Dev/ansible-role-unifi-controller/commit/5edf4f8d9579d54f527582d7aae9cc4f3b5c44c0))
+
+
+### Bug Fixes
+
+* Update README. ([31dd0bf](https://git.laurivan.com/Dev/ansible-role-unifi-controller/commit/31dd0bf6c294d2566336a2de0f95e402a7d82f2a))
 
 ## [1.0.0](https://github.com/equinoxel/ansible-role-unifi-controller/tree/1.0.0)
 - Initial release

@@ -21,7 +21,9 @@
       when: "not docker_sock_stat.stat.exists"
 
     - name: "UNIFI-CONTROLLER | Update apt cache."
-      ansible.builtin.apt: update_cache=yes cache_valid_time=600
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 600
       when: "ansible_os_family == 'Debian'"
 
     - name: "UNIFI-CONTROLLER | Install python requests"

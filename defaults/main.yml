@@ -33,7 +33,7 @@ unifi_config_path: "{{ unifi_root_path }}/conf/unifi-controller"
 unifi_skeleton_paths:
   - "{{ unifi_config_path }}"
 
-# Add more templates to be copied into the config 
+# Add more templates to be copied into the config
 unifi_configuration_files:
   - "docker-compose.yml"
   - "env.unifi-controller.conf"

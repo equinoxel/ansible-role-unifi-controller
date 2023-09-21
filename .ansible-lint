@@ -1,10 +1,12 @@
 ---
 exclude_paths:
+  - .cache/
   - ./molecule
   - ./.travis.yml
   - ./.github
 parseable: true
 skip_list:
   - '204'
+  - 'no-handler'
 use_default_rules: true
 verbosity: 1

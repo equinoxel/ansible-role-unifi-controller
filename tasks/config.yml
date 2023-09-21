@@ -15,10 +15,9 @@
 - name: "UNIFI-CONTROLLER | Write configuration files"
   ansible.builtin.template:
     src: "{{ item }}.j2"
-    dest: "{{ unifi_config_path | expanduser | realpath  }}/{{ item  }}"
+    dest: "{{ unifi_config_path | expanduser | realpath }}/{{ item }}"
     mode: '0640'
   with_items:
     - "{{ unifi_configuration_files }}"
   tags:
     - unifi_configure
-  

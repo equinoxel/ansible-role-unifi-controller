@@ -1,11 +1,11 @@
 ---
 
 - name: "UNIFI-CONTROLLER | Configure"
-  import_tasks: config.yml
+  ansible.builtin.import_tasks: config.yml
   tags:
     - unifi_configure
 
 - name: "UNIFI-CONTROLLER | Install"
-  import_tasks: install.yml
+  ansible.builtin.import_tasks: install.yml
   tags:
     - unifi_install

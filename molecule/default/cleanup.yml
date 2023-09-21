@@ -9,7 +9,7 @@
 
     - name: "UNIFI-CONTROLLER | Check if the docker-compose file exists."
       ansible.builtin.stat:
-        path: "{{ unifi_config_path  | expanduser | realpath }}/docker-compose.yml"
+        path: "{{ unifi_config_path | expanduser | realpath }}/docker-compose.yml"
       register: "docker_compose_file"
 
     - name: "UNIFI-CONTROLLER | Remove docker-compose."

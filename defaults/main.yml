@@ -1,12 +1,14 @@
 ---
 
 ## General
-unifi_image: lscr.io/linuxserver/unifi-controller:latest
+unifi_image: lscr.io/linuxserver/unifi-network-application:latest
+unifi_container_name: unifi-network-application
 
 unifi_uid: 1000
 unifi_gid: 1000
 unifi_mem_limit: 1024
 unifi_mem_startup: 1024
+unifi_tz: "Etc/UTC"
 
 unifi_volume: "unifi"
 
@@ -22,6 +24,13 @@ unifi_http_port_8880: 8880
 unifi_http_port_6789: 6789
 unifi_http_port_5514: 5514
 
+unifi_mongo_user: unifi
+unifi_mongo_pass:
+unifi_mongo_host: unifi-db 
+unifi_mongo_port: 27017
+unifi_nongo_db_name: unifi
+unifi_mongo_auth_source: admin
+unifi_mongo_tls:
 
 # Unifi-Controller paths
 unifi_root_path: /var/local

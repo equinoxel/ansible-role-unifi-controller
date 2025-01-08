@@ -1,9 +1,10 @@
 # unifi-controller docker compose
+---
 version: '3.9'
 services:
   unifi-controller:
     image: "{{ unifi_image }}"
-    container_name: unifi-controller-service
+    container_name: "{{ unifi_container_name }}"
     restart: unless-stopped
     env_file:
       - "{{ unifi_config_path | expanduser }}/env.unifi-controller.conf"

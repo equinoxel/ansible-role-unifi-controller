@@ -1,22 +1,39 @@
 ---
-- name: "UNIFI-CONTROLLER | Set up directories"
+- name: "UNIFI-CONTROLLER | Check existing directories"
+  ansible.builtin.stat:
+    path: "{{ item }}"
+  register: unifi_folder_stats
+  with_items:
+  - "{{ unifi_skeleton_paths }}"
+  tags:
+    - unifi_configure
+  become: true
+
+- name: "UNIFI-CONTROLLER | Print scanned dirs"
+  ansible.builtin.debug:
+    msg: "Scanned: {{ item }}"
+  loop: "{{ unifi_folder_stats.results  | map(attribute='item') | list }}"
+
+- name: "UNIFI-CONTROLLER | Set up directories if they don't exist"
   ansible.builtin.file:
     state: directory
-    path: "{{ item }}"
+    path: "{{ item.invocation.module_args.path }}"
     owner: "{{ ansible_effective_user_id }}"
     group: "{{ ansible_effective_group_id }}"
     mode: "0750"
-  with_items:
-    - "{{ unifi_skeleton_paths }}"
+  loop: "{{ unifi_folder_stats.results }}"
+  loop_control:
+    label: "{{ item.invocation.module_args.path }}"
+  when: not item.stat.exists
   tags:
     - unifi_configure
   become: true
 
 - name: "UNIFI-CONTROLLER | Write configuration files"
   ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: "{{ unifi_config_path | expanduser | realpath }}/{{ item }}"
-    mode: '0640'
+    src: "{{ item[0] }}.j2"
+    dest: "{{ unifi_config_path | expanduser | realpath }}/{{ item[0] }}"
+    mode: "{{ item[1] }}"
   with_items:
     - "{{ unifi_configuration_files }}"
   tags:

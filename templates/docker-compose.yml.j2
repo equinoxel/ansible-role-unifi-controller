@@ -1,10 +1,29 @@
-# unifi-controller docker compose
+# unifi-network-app docker compose
 ---
-version: '3.9'
 services:
+{% if unifi_mongo_local %}
+  unifi-db:
+    container_name: unifi-db
+    image: "{{ unifi_image_mongodb }}"
+    env_file:
+      - "{{ unifi_config_path | expanduser }}/env.mongodb.conf"
+    ports:
+      - target: 27017
+        published: "27017"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - "{{ unifi_config_path | expanduser }}/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js"
+      - type: bind
+        source: "{{ unifi_mongodb_path }}"
+        target: /data/db
+    networks:
+     - unifi-bridge
+{% endif %}
+{% if unifi_server_enabled %}
   unifi-controller:
-    image: "{{ unifi_image }}"
-    container_name: "{{ unifi_container_name }}"
+    image: "{{ unifi_image_unifi }}"
+    container_name: "{{ unifi_container_name_unifi }}"
     restart: unless-stopped
     env_file:
       - "{{ unifi_config_path | expanduser }}/env.unifi-controller.conf"
@@ -13,29 +32,31 @@ services:
       - "{{ unifi_http_port_3478 }}:3478/udp"
       - "{{ unifi_http_port_10001 }}:10001/udp"
       - "{{ unifi_http_port_8080 }}:8080"
-      {% if unifi_http_port_1900 is defined -%}
+      {% if unifi_http_port_1900 is defined and unifi_http_port_1900 -%}
       - "{{ unifi_http_port_1900 }}:1900/udp"
       {% endif -%}
-      {% if unifi_http_port_8843 is defined -%}
+      {% if unifi_http_port_8843 is defined and unifi_http_port_8843 -%}
       - "{{ unifi_http_port_8843 }}:8843"
       {% endif -%}
-      {% if unifi_http_port_8880 is defined -%}
+      {% if unifi_http_port_8880 is defined and unifi_http_port_8880 -%}
       - "{{ unifi_http_port_8880 }}:8880"
       {% endif -%}
-      {% if unifi_http_port_6789 is defined -%}
+      {% if unifi_http_port_6789 is defined and unifi_http_port_6789 -%}
       - "{{ unifi_http_port_6789 }}:6789"
       {% endif -%}
-      {% if unifi_http_port_5514 is defined -%}
+      {% if unifi_http_port_5514 is defined and unifi_http_port_5514 -%}
       - "{{ unifi_http_port_5514 }}:5514/udp"
       {% endif %}
 
     networks:
-      - unifi-controller-net
+      - unifi-bridge
     volumes:
-      - "{{ unifi_volume }}:/config"
-
-volumes:
-  {{ unifi_volume }}:
+      - type: bind
+        source: "{{ unifi_network_application_path }}"
+        target: /config
+{% endif %}
 
 networks:
-  unifi-controller-net: {}
+  unifi-bridge:
+    driver: bridge
+

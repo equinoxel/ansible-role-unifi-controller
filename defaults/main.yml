@@ -1,8 +1,9 @@
 ---
 
 ## General
-unifi_image: lscr.io/linuxserver/unifi-network-application:latest
-unifi_container_name: unifi-network-application
+unifi_image_unifi: lscr.io/linuxserver/unifi-network-application:latest
+unifi_image_mongodb: docker.io/mongo:3.6
+unifi_container_name_unifi: unifi-network-application
 
 unifi_uid: 1000
 unifi_gid: 1000
@@ -24,28 +25,39 @@ unifi_http_port_8880: 8880
 unifi_http_port_6789: 6789
 unifi_http_port_5514: 5514
 
+unifi_server_enabled: true
+unifi_mongo_local: true
 unifi_mongo_user: unifi
-unifi_mongo_pass:
-unifi_mongo_host: unifi-db 
+unifi_mongo_pass: unifi
+unifi_mongo_host: "unifi-db" 
 unifi_mongo_port: 27017
-unifi_nongo_db_name: unifi
-unifi_mongo_auth_source: admin
+unifi_mongo_db_name: unifi-db
+unifi_mongo_auth_source:
 unifi_mongo_tls:
 
 # Unifi-Controller paths
 unifi_root_path: /var/local
-unifi_data_base:  "{{ unifi_root_path }}/unifi-controller"
-unifi_config_path: "{{ unifi_root_path }}/conf/unifi-controller"
+unifi_config_path: "{{ unifi_root_path }}/conf/unifi-network-application"
+unifi_data_base:  "{{ unifi_root_path }}/unifi-network-application/unifi"
+unifi_mongodb_path: "{{ unifi_data_base }}/unifi-db"
+unifi_network_application_path: "{{ unifi_data_base }}/unifi-network-application"
+
+
 
 # Add other paths here to make sure they're created automatically
 #
 unifi_skeleton_paths:
   - "{{ unifi_config_path }}"
+  - "{{ unifi_data_base }}"
+  - "{{ unifi_mongodb_path }}"
+  - "{{ unifi_network_application_path }}"
 
 # Add more templates to be copied into the config
 unifi_configuration_files:
-  - "docker-compose.yml"
-  - "env.unifi-controller.conf"
+  - ["docker-compose.yml", "0640"]
+  - ["env.unifi-controller.conf", "0640"]
+  - ["env.mongodb.conf", "0640"]
+  - ["init-mongo.js", "0644"]
 
 # Documentation
 unifi_documentation_link: "https://www.laurivan.com"

@@ -1,3 +1,15 @@
+## **v1.1.2**&emsp;<sub><sup>2025-01-08 (87ead41f5e65ec7beca3e1ab3e01e1a5dc5c17c1...debb1f9e6395a022a53630b5d95686235f23c1ca)</sup></sub>
+
+### Bug Fixes
+
+- Use the variable container name (d4291453cc1c3092db8eaf4fc4fc8db8d4550986)
+
+### Merges
+
+- pull request 'server\-v9' \(\#1\) from server\-v9 into main (debb1f9e6395a022a53630b5d95686235f23c1ca)
+
+<br>
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.

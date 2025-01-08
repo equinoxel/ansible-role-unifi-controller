@@ -1,3 +1,11 @@
+## **1.1.3**&emsp;<sub><sup>2025-01-08 (9e5403f5ea77b2a2583799b27c9318d79e54c19e...9e5403f5ea77b2a2583799b27c9318d79e54c19e)</sup></sub>
+
+### Bug Fixes
+
+- Fix errorneous mongo configuration (9e5403f5ea77b2a2583799b27c9318d79e54c19e)
+
+<br>
+
 ## **v1.1.2**&emsp;<sub><sup>2025-01-08 (87ead41f5e65ec7beca3e1ab3e01e1a5dc5c17c1...debb1f9e6395a022a53630b5d95686235f23c1ca)</sup></sub>
 
 ### Bug Fixes

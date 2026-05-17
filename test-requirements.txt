@@ -1,4 +1,4 @@
-urllib3==1.26.13
+urllib3==2.7.0
 ansible==8.3.0
 molecule==6.0.2
 docker==7.1.0
